@@ -76,64 +76,125 @@ Tanggal          : ____________________
 
 ---
 
-## Latihan 1 — Identifikasi Distorsi
-
-Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan performa." Telusuri setiap tahap Research Trust Model.
+# ✅ **Latihan 1 **
 
 **Paper yang dipilih:**
-> Judul: _______________________________________________
-> Penulis (Tahun): ______________________________________
 
-| Tahap | Apa yang Dilakukan | Potensi Distorsi |
-|-------|-------------------|-----------------|
-| Reality → Data | *Contoh: Kumpulkan log server 30 hari* | *Contoh: Hanya ambil jam sibuk* |
-| Data → Processing | | |
-| Processing → Analysis | | |
-| Analysis → Inference | | |
-| Inference → Knowledge | | |
+> Judul: *Evaluasi Algoritma Machine Learning untuk Klasifikasi dan Prediksi Penggunaan Lahan*
+> Penulis (Tahun): Fajar Nugraha et al. (2024) ([Jurnal UGM][1])
 
-**Distorsi paling besar di tahap:** ________________________
+📌 Kenapa ini bagus:
 
-**Dua distorsi spesifik yang teridentifikasi:**
-1. ___________________________________________________
-2. ___________________________________________________
+* Penelitian Indonesia (IPB, UGM context)
+* Mengandung klaim performa (akurasi & kappa)
+* Cocok banget untuk analisis distorsi
 
 ---
 
-## Latihan 2 — Analisis Kasus Etika
+## 📊 Analisis Research Trust Model
 
-Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, hasil eksperimennya menjadi signifikan. Dengan outlier, hasilnya tidak signifikan.
+| Tahap                     | Apa yang Dilakukan                                    | Potensi Distorsi                                                 |
+| ------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------- |
+| **Reality → Data**        | Menggunakan data penggunaan lahan (Sub DAS Tanralili) | Data terbatas geografis (tidak representatif global)             |
+| **Data → Processing**     | Klasifikasi citra dengan algoritma (kNN, SVM, GMM)    | Preprocessing bisa mempengaruhi hasil (misalnya pemilihan fitur) |
+| **Processing → Analysis** | Evaluasi model dengan metrik **kappa & accuracy**     | Overfitting atau tuning parameter berlebihan                     |
+| **Analysis → Inference**  | Menyimpulkan SVM memiliki performa terbaik            | Tidak semua kondisi diuji (generalization issue)                 |
+| **Inference → Knowledge** | Klaim metode terbaik untuk klasifikasi lahan          | Overgeneralization ke wilayah lain                               |
 
-| Perspektif | Analisis |
-|------------|---------|
-| Kejujuran ilmiah | *Contoh: Laporkan kedua versi (dengan dan tanpa outlier)* |
-| Transparansi | |
-| Peer review | |
+📌 Paper ini memang menunjukkan bahwa:
 
-**Keputusan akhir dan justifikasi:**
-> ___________________________________________________
-
----
-
-## Latihan 3 — Posisi Paradigma
-
-**Topik riset:** ________________________________________
-
-| Kriteria | Positivis | Interpretivis | Design Science |
-|----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | *Contoh: 4* | *Contoh: 2* | *Contoh: 5* |
-| Jenis data yang dikumpulkan | | | |
-| Limitasi paradigma | | | |
-
-**Paradigma yang dipilih:** _____________________________
-**Alasan:** ____________________________________________
+* SVM memiliki kinerja rata-rata terbaik (kappa tinggi) ([Jurnal UGM][1])
 
 ---
 
-## Refleksi
+## 🎯 Distorsi paling besar:
 
-> Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
+➡️ **Reality → Data**
 
-**Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+---
+
+## ⚠️ Dua distorsi spesifik:
+
+### 1. **Sampling Bias (Geographical Bias)**
+
+* Dataset hanya dari **satu wilayah (Sub DAS Tanralili)**
+* Tidak mencerminkan kondisi wilayah lain di Indonesia
+  👉 Dampak: hasil tidak bisa digeneralisasi luas
+
+---
+
+### 2. **Metric Bias (Kappa vs Real-world Performance)**
+
+* Menggunakan **kappa & accuracy**
+* Belum tentu mencerminkan performa di kondisi nyata (misalnya perubahan lahan dinamis)
+
+---
+
+# ✅ **Latihan 2 — Analisis Etika (Versi Lebih Akademik)**
+
+| Perspektif           | Analisis                                                |
+| -------------------- | ------------------------------------------------------- |
+| **Kejujuran ilmiah** | Menghapus outlier tanpa alasan = manipulasi             |
+| **Transparansi**     | Harus dijelaskan apakah outlier error atau fenomena     |
+| **Peer review**      | Reviewer akan meminta uji statistik (IQR, Z-score, dll) |
+
+---
+
+### ✅ Keputusan akhir:
+
+> Outlier **tidak boleh dihapus hanya untuk mendapatkan hasil signifikan**.
+>
+> Praktik yang benar:
+>
+> * Laporkan hasil dengan & tanpa outlier
+> * Jelaskan alasan penghapusan
+>
+> Ini penting untuk menghindari bias dan praktik seperti **HARKing**.
+
+---
+
+# ✅ **Latihan 3 — Posisi Paradigma**
+
+**Topik riset:**
+➡️ *Evaluasi algoritma machine learning untuk klasifikasi penggunaan lahan*
+
+| Kriteria   | Positivis                     | Interpretivis          | Design Science           |
+| ---------- | ----------------------------- | ---------------------- | ------------------------ |
+| Kesesuaian | 5                             | 1                      | 4                        |
+| Jenis data | Data numerik (akurasi, kappa) | Tidak relevan          | Model ML sebagai artefak |
+| Limitasi   | Abaikan konteks sosial        | Tidak cocok eksperimen | Fokus artefak            |
+
+---
+
+### 🎯 Paradigma:
+
+➡️ **Positivis + Design Science**
+
+---
+
+### 📌 Alasan:
+
+* Positivis → karena berbasis pengukuran objektif
+* Design Science → karena membangun & menguji model ML
+
+---
+
+# ✅ **Refleksi **
+
+> Sebelumnya saya cenderung menerima hasil seperti “akurasi tinggi” sebagai indikator keberhasilan metode.
+>
+> Namun setelah memahami Research Trust Model, saya menyadari bahwa hasil tersebut sangat bergantung pada:
+>
+> * kualitas dataset
+> * metode preprocessing
+> * metrik evaluasi
+>
+> Pada paper ini, misalnya, penggunaan dataset yang terbatas secara geografis berpotensi menimbulkan bias dalam generalisasi hasil.
+>
+> Oleh karena itu, saya kini akan lebih kritis dengan mempertanyakan:
+>
+> * apakah data representatif
+> * apakah metode evaluasi sesuai
+> * apakah hasil dapat diterapkan di konteks lain
+
+---
