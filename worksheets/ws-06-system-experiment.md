@@ -80,25 +80,25 @@ Jika variabel tidak bisa di-map ke komponen apapun → arsitektur perlu didesain
 ```
 SYSTEM-EXPERIMENT MAPPING
 
-Research Question: ____________________
+Research Question: Bagaimanakah pemetaan capaian indeks kualitas layanan internet nirkabel... di lingkungan kampus Universitas Putra Bangsa (UPB)?
 
 Variable → Component Mapping:
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi/Pengukuran |
 |----------|------|-----------------|---------------------------|
-|          | IV   |                 |                           |
-|          | DV   |                 |                           |
-|          | CV   |                 |                           |
+| Titik Spasial & Temporal | IV | Modul Packet Sniffer (Komponen I) | Memindahkan posisi fisik gawai penerima dan mengatur penjadwalan waktu capture. |
+| Parameter QoS & Indeks | DV | Modul Data Exporter (Komponen II) & Modul Scoring Engine (Komponen III) | Mengekstrak berkas .pcap menjadi .csv dan menghitung nilai metrik QoS berdasar rumus TIPHON. |
+| Durasi, Software, Device | CV | Script konfigurasi locked di Modul Packet Sniffer | Menetapkan runtime 5 menit, Wireshark versi seragam, dan keseragaman hardware laptop. |
 
 4 Prinsip Desain:
-  [ ] Traceability — Setiap komponen bisa ditelusuri ke variabel
-  [ ] Variable Isolation — IV bisa diubah tanpa mengubah CV
-  [ ] Measurement Integration — Pengukuran DV built-in
-  [ ] Reproducibility — Setup bisa direkonstruksi
+  [x] Traceability — Setiap komponen bisa ditelusuri ke variabel
+  [x] Variable Isolation — IV bisa diubah tanpa mengubah CV
+  [x] Measurement Integration — Pengukuran DV built-in
+  [x] Reproducibility — Setup bisa direkonstruksi
 
 Experimental Setup:
-  Input data     : ____________________
-  Parameter      : ____________________
-  Output format  : ____________________
+  Input data     : Paket data nirkabel mentah (raw traffic capture) format berkas biner .pcap.
+  Parameter      : Durasi capture 5 menit per sesi, 4 lokasi spasial (Ruby Tengah, Kopma, Lorong Lab Komputer, Lorong Lab AI), 3 sesi temporal harian (07.50, 13.00, 16.00).
+  Output format  : File data tabular metrik (.csv) dan Laporan visual diagram batang komparatif di Dashboard Reporter (Komponen IV).
 ```
 
 ---
@@ -107,16 +107,16 @@ Experimental Setup:
 
 Gunakan RQ dan variabel dari WS-05. Petakan ke komponen sistem.
 
-**RQ:** __________________________________________________
+**RQ:** Bagaimanakah pemetaan capaian indeks kualitas layanan internet nirkabel... di lingkungan kampus Universitas Putra Bangsa (UPB)?
 
 | Variabel | Tipe | Komponen Sistem | Cara Manipulasi / Pengukuran |
 |----------|------|-----------------|---------------------------|
-| *Contoh: Jenis model* | *IV* | *Modul classifier (swap RF ↔ CNN)* | *Ganti config `model_type`* |
-| | DV | | |
-| | CV | | |
+| Titik Spasial & Temporal | IV | Modul Packet Sniffer (Komponen I) | Ganti parameter lokasi capture dan jadwal waktu capture |
+| Metrik QoS & Indeks MOS | DV | Modul Data Exporter & Modul Scoring Engine | Pemrosesan ekstraksi .pcap -> .csv dan kalkulasi indeks TIPHON |
+| Durasi, Software, Hardware | CV | Script config sniffer & spesifikasi laptop homogen | Kunci durasi 5 menit, lock Wireshark version, gunakan 1 laptop yang sama |
 
-**Apakah semua variabel bisa di-map?** [ ] Ya / [ ] Tidak
-> Jika tidak, komponen apa yang perlu ditambahkan? _________
+**Apakah semua variabel bisa di-map?** [x] Ya / [ ] Tidak
+> Jika tidak, komponen apa yang perlu ditambahkan? —
 
 ---
 
@@ -126,14 +126,14 @@ Evaluasi desain sistem terhadap 4 prinsip.
 
 | Prinsip | Status | Bukti / Penjelasan |
 |---------|--------|-------------------|
-| Traceability | *Contoh: ✅ — setiap modul punya label variabel* | |
-| Modularity | | |
-| Controllability | | |
-| Measurability | | |
+| Traceability | ✅ | Setiap modul (sniffer, exporter, scoring engine) melayani manipulasi/pengukuran variabel tertentu. |
+| Modularity | ✅ | Modul Scoring Engine dapat diganti (Excel -> Pandas) tanpa memengaruhi modul Packet Sniffer. |
+| Controllability | ✅ | Parameter durasi capture dan interface NIC dikunci dalam script configurasi. |
+| Measurability | ✅ | Dashboard Reporter otomatis mengumpulkan data hasil perhitungan dan menyajikannya secara grafis. |
 
-**Prinsip mana yang paling sulit dipenuhi?** _______________
+**Prinsip mana yang paling sulit dipenuhi?** Controllability (mengontrol background noise/interferensi dari trafik nirkabel pengguna lain di sekitar titik).
 **Strategi untuk mengatasinya:**
-> ___________________________________________________
+> Melakukan pencatatan trafik latar belakang (background noise) selama durasi capture untuk mengidentifikasi anomali/pencilan data (outlier).
 
 ---
 
@@ -146,14 +146,14 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 
 | Kondisi | Komponen A | Komponen B | Komponen C | Hasil yang Diharapkan |
 |---------|-----------|-----------|-----------|----------------------|
-| Full | *Contoh: ✅ CNN* | *Contoh: ✅ Temporal features* | *Contoh: ✅ Z-score norm* | *Baseline penuh* |
-| – A | ❌ (ganti RF) | ✅ | ✅ | |
-| – B | ✅ | ❌ (tanpa temporal) | ✅ | |
-| – C | ✅ | ✅ | ❌ (tanpa normalisasi) | |
+| Full | ✅ Pandas Exporter | ✅ Scoring Engine TIPHON | ✅ Dashboard Reporter | Sistem berjalan otomatis menghasilkan data terstruktur beserta visualisasi predikat MOS |
+| – A | ❌ (Excel Exporter) | ✅ | ✅ | Pengolahan lambat, rentan kesalahan input manual |
+| – B | ✅ | ❌ (Tanpa Scoring Engine) | ✅ | Dashboard hanya menyajikan angka mentah (delay, throughput) tanpa predikat kelayakan |
+| – C | ✅ | ✅ | ❌ (Tanpa Dashboard) | Hasil analisis disajikan dalam bentuk file log teks di konsol |
 
-**Komponen mana yang diprediksi paling berkontribusi?** _____
+**Komponen mana yang diprediksi paling berkontribusi?** Komponen B (Scoring Engine)
 **Mengapa?**
-> ___________________________________________________
+> Karena tanpa standardisasi TIPHON (Scoring Engine), metrik teknis rasio yang diekstraksi tidak memiliki makna predikat kelayakan bagi pengguna akhir.
 
 ---
 
@@ -162,5 +162,4 @@ Jika sistem memiliki 3 komponen utama, rencanakan ablation study.
 > Apa risiko jika sistem dibangun seperti produk (monolitik, fitur lengkap) lalu baru dilakukan eksperimen? Mengapa arsitektur modular penting untuk riset?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Risiko membangun sistem riset secara monolitik (seperti produk) adalah kesulitan dalam melakukan isolasi variabel. Ketika performa logis menurun, peneliti tidak dapat membuktikan apakah degradasi tersebut disebabkan oleh variabel riset (IV) yang diuji atau karena overhead dari fitur tambahan yang tidak relevan dengan RQ. Arsitektur modular penting untuk memastikan variable isolation dan reproducibility eksperimen.

@@ -67,33 +67,33 @@ Masalah riset yang layak harus memenuhi 5 kriteria:
 PROBLEM STATEMENT BUILDER
 
 Domain & Konteks
-  Domain   : ____________________
-  Konteks  : ____________________
+  Domain   : Jaringan Komputer / Analisis Kualitas Layanan (Quality of Service - QoS)
+  Konteks  : Jaringan internet nirkabel (Wi-Fi) di lingkungan kampus Universitas Putra Bangsa (UPB) pada area perkuliahan yang padat aktivitas.
 
 System Context
-  Input       : ____________________
-  Process     : ____________________
-  Output      : ____________________
-  Outcome     : ____________________
-  Constraints : ____________________
-  Stakeholders: ____________________
+  Input       : Aliran paket data mentah (raw data traffic) dari aktivitas nirkabel gawai penerima dalam format berkas biner .pcap yang ditangkap menggunakan Wireshark.
+  Process     : Penyadapan data (sniffing), ekspor biner .pcap ke .csv (Modul Data Exporter), kalkulasi metrik QoS (throughput, delay, jitter, packet loss) dan konversi ke skala indeks TIPHON (Modul Scoring Engine), serta pelaporan visual komparatif spasial-temporal di Dashboard Reporter.
+  Output      : Nilai kuantitatif throughput (Kbps), packet loss (%), delay (ms), jitter (ms), dan indeks MOS kelayakan versi TIPHON (skala 0-4).
+  Outcome     : Peta sebaran kualitas layanan Wi-Fi kampus sebagai rekomendasi empiris yang objektif bagi pengelola IT kampus untuk alokasi bandwidth dan penempatan Access Point.
+  Constraints : Durasi capture dibatasi 5 menit per sesi, lokasi spasial dibatasi pada 4 area (Ruby Tengah, Kopma, Lorong Lab Komputer, Lorong Lab AI), sesi temporal dibatasi pada jam sibuk perkuliahan (07.50, 13.00, 16.00), spesifikasi perangkat NIC penerima homogen, dan versi Wireshark dikunci.
+  Stakeholders: Pengelola IT/Network Administrator Kampus UPB, Dosen, Mahasiswa.
 
 Fenomena → Problem
-  Fenomena yang diamati             : ____________________
-  Gejala (symptom) yang terukur     : ____________________
-  Masalah yang didiagnosis          : ____________________
-  Masalah riset (researchable)      : ____________________
-  Variabel yang terukur             : ____________________
+  Fenomena yang diamati             : Keluhan subjektif pengguna (mahasiswa/dosen) mengenai kelambatan koneksi internet Wi-Fi kampus UPB.
+  Gejala (symptom) yang terukur     : Penurunan performa logis jaringan (throughput rendah, packet loss tinggi) di area tertentu pada jam sibuk perkuliahan.
+  Masalah yang didiagnosis          : Monitoring internal IT hanya memantau status aktif/mati perangkat keras (hardware-centric), sehingga kegagalan alokasi bandwidth dan kemacetan trafik (traffic congestion) logis dari sudut pandang gawai pengguna (user-centric end-to-end) tidak terdeteksi.
+  Masalah riset (researchable)      : Belum ada pemetaan kualitas layanan internet nirkabel (end-to-end QoS) menggunakan standar TIPHON pada arsitektur enterprise multi-building (seperti Kampus UPB) pada jam sibuk perkuliahan.
+  Variabel yang terukur             : Throughput (Kbps), Packet Loss (%), Delay (ms), Jitter (ms), dan Nilai Indeks MOS.
 
 Problem Quality Check
-  [ ] Clarity — Apakah satu orang membaca akan paham?
-  [ ] Measurability — Apakah ada metrik kuantitatif?
-  [ ] Relevance — Apakah penting untuk domain?
-  [ ] Testability — Apakah bisa gagal?
-  [ ] Impact — Apakah ada kontribusi jika terjawab?
+  [x] Clarity — Apakah satu orang membaca akan paham?
+  [x] Measurability — Apakah ada metrik kuantitatif?
+  [x] Relevance — Apakah penting untuk domain?
+  [x] Testability — Apakah bisa gagal?
+  [x] Impact — Apakah ada kontribusi jika terjawab?
 
 Problem Statement (1 paragraf):
-  ____________________
+  Jaringan internet nirkabel (Wi-Fi) di lingkungan Universitas Putra Bangsa (UPB) kerap mengalami degradasi performa logis (Quality of Service) pada jam-jam aktif perkuliahan, namun sistem monitoring infrastruktur internal kampus saat ini hanya berfokus pada status aktif/mati perangkat nirkabel (hardware-centric) tanpa mengukur kualitas layanan riil dari sisi gawai pengguna (user-centric end-to-end). Ketiadaan data performa logis berkala ini mengakibatkan administrator jaringan kesulitan mendeteksi titik degradasi (bottleneck) akibat kegagalan alokasi kapasitas (bandwidth) dan kepadatan lalu lintas (traffic congestion) lokal secara spasial-temporal. Guna mengatasi kesenjangan informasi tersebut, penelitian ini bertujuan untuk memetakan capaian indeks QoS internet nirkabel di 5 lokasi strategis kampus UPB pada 3 interval waktu perkuliahan menggunakan parameter standar TIPHON berbasis rekaman paket data (traffic capture) Wireshark, guna menyediakan landasan keputusan yang objektif bagi optimasi infrastruktur jaringan bertipe enterprise multi-building.
 ```
 
 ---
@@ -102,18 +102,18 @@ Problem Statement (1 paragraf):
 
 Pilih satu topik di bidang TI yang diminati. Transformasikan melalui 5 tahap Problem Formation Model.
 
-**Topik awal:** ________________________________________
+**Topik awal:** Analisis Kualitas Layanan (Quality of Service - QoS) Jaringan Wi-Fi Kampus tipe Enterprise Multi-Building
 
 | Tahap | Hasil |
 |-------|-------|
-| Reality | *Contoh: Aplikasi e-commerce sering ditinggalkan saat checkout* |
-| Observed Issue (Symptom) | *Contoh: Bounce rate checkout 68%* |
-| Diagnosed Problem (Root Cause) | |
-| Researchable Problem | |
-| Measurable Variable | |
+| Reality | Pengguna Wi-Fi UPB sering merasakan kelambatan akses internet saat berada di area kampus. |
+| Observed Issue (Symptom) | Sering terjadi request time out (RTO) dan kegagalan memuat SIA pada jam perkuliahan aktif. |
+| Diagnosed Problem (Root Cause) | Sistem monitoring IT Helpdesk hanya mengamati ketersediaan perangkat keras nirkabel (up/down time), sehingga penumpukan pengguna dinamis (traffic congestion) di area tertentu gagal dideteksi secara logis. |
+| Researchable Problem | Belum ada pemetaan performa logis Wi-Fi secara end-to-end menggunakan standar TIPHON yang meninjau variasi spasial (4 area observasi) dan temporal (3 sesi waktu) secara kuantitatif di UPB. |
+| Measurable Variable | Throughput (Kbps), Packet Loss (%), Delay (ms), Jitter (ms), dan Indeks MOS TIPHON (0-4). |
 
-**Apakah terjebak solution-first thinking?** [ ] Ya / [ ] Tidak
-> Jika ya, kembali ke tahap mana? ________________________
+**Apakah terjebak solution-first thinking?** [ ] Ya / [x] Tidak
+> Jika ya, kembali ke tahap mana? —
 
 ---
 
@@ -123,14 +123,14 @@ Gambarkan konteks sistem dari masalah riset di Latihan 1.
 
 | Komponen | Deskripsi |
 |----------|----------|
-| Input | *Contoh: Request HTTP dari browser pengguna* |
-| Process | |
-| Output | |
-| Outcome | |
-| Constraints | |
-| Stakeholders | |
+| Input | File capture data paket biner (.pcap) berdurasi 5 menit dari Wireshark. |
+| Process | Penyadapan data (sniffing) -> Ekspor PCAP ke CSV -> Perhitungan parameter QoS TIPHON -> Visualisasi dashboard. |
+| Output | Angka metrik QoS riil dan nilai indeks MOS (kategori TIPHON). |
+| Outcome | Basis data rekomendasi penataan Access Point dan alokasi bandwidth. |
+| Constraints | 5 menit durasi capture, 4 titik spasial (Ruby Tengah, Kopma, Lorong Lab Komputer, Lorong Lab AI), 3 sesi waktu temporal (07.50, 13.00, 16.00), NIC homogen. |
+| Stakeholders | IT Helpdesk UPB, Dosen, Mahasiswa. |
 
-**Komponen mana yang paling relevan dengan masalah riset?** _______________
+**Komponen mana yang paling relevan dengan masalah riset?** Process dan Constraints
 
 ---
 
@@ -140,17 +140,16 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 
 | Kriteria | Skor (1-5) | Justifikasi |
 |----------|-----------|-------------|
-| Clarity | *Contoh: 4 — cukup jelas tapi perlu spesifikasi dataset* | |
-| Measurability | | |
-| Relevance | | |
-| Testability | | |
-| Impact | | |
+| Clarity | 5 | Masalah didefinisikan dengan jelas mencakup gap monitoring, parameter standar, dan batasan spasial-temporal. |
+| Measurability | 5 | Diukur secara kuantitatif lewat throughput (Kbps), delay (ms), jitter (ms), dan packet loss (%) terstandar TIPHON. |
+| Relevance | 5 | Sangat relevan bagi kestabilan pembelajaran digital sivitas akademika UPB. |
+| Testability | 4 | Sangat dapat diuji dan dibuktikan salah (falsifiable) jika performa QoS tetap stabil di atas ambang batas. |
+| Impact | 4 | Memberikan rekomendasi penataan bandwidth dan Access Point secara empiris. |
 
-**Skor total:** _____ / 25
+**Skor total:** 23 / 25
 
 **Problem statement versi final (1 paragraf):**
-> ___________________________________________________
-> ___________________________________________________
+> Jaringan internet nirkabel (Wi-Fi) di lingkungan Universitas Putra Bangsa (UPB) kerap mengalami degradasi performa logis (Quality of Service) pada jam-jam aktif perkuliahan, namun sistem monitoring infrastruktur internal kampus saat ini hanya berfokus pada status aktif/mati perangkat nirkabel (hardware-centric) tanpa mengukur kualitas layanan riil dari sisi gawai pengguna (user-centric end-to-end). Ketiadaan data performa logis berkala ini mengakibatkan administrator jaringan kesulitan mendeteksi titik degradasi (bottleneck) akibat kegagalan alokasi kapasitas (bandwidth) dan kepadatan lalu lintas (traffic congestion) lokal secara spasial-temporal. Guna mengatasi kesenjangan informasi tersebut, penelitian ini bertujuan untuk memetakan capaian indeks QoS internet nirkabel di 4 lokasi strategis kampus UPB pada 3 interval waktu perkuliahan (07.50, 13.00, 16.00) menggunakan parameter standar TIPHON berbasis rekaman paket data (traffic capture) Wireshark selama 5 menit, guna menyediakan landasan keputusan yang objektif bagi optimasi infrastruktur jaringan bertipe enterprise multi-building.
 
 ---
 
@@ -159,5 +158,4 @@ Evaluasi problem statement yang sudah dibuat menggunakan 5 kriteria.
 > Bandingkan "masalah" yang biasa ditemui saat coding (bug, error) dengan masalah riset. Apa perbedaan fundamental dalam cara mendefinisikan dan mendekati keduanya?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Perbedaan fundamental terletak pada sifat ketidakpastian dan tujuan akhirnya. Bug/error coding adalah masalah tertutup (closed problem) dengan kondisi benar yang sudah pasti dan diselesaikan secara deterministik melalui rekayasa/perbaikan kode (solve). Sementara itu, masalah riset adalah kesenjangan dalam tubuh pengetahuan (open problem) yang didekati secara ilmiah melalui pengujian hipotesis dan pembuktian empiris yang dapat direplikasi (understand & prove).

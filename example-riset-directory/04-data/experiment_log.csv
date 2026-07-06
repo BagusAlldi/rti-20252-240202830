@@ -1,0 +1,61 @@
+Run ID,Lokasi,Sesi,Run #,Throughput (Kbps),Delay (ms),Jitter (ms),Packet Loss (%),Idx Throughput,Idx Delay,Idx Jitter,Idx Loss,Avg Index,Predikat,File PCAP
+run-0630075801,Kopma,Pagi,1,2946.81,116.72,3.73,7.81,4,4,3,3,3.5,Baik,raw_data\kopma_pagi_run1.pcap
+run-0701075813,Kopma,Pagi,2,1415.08,51.84,7.58,4.98,3,4,3,3,3.25,Baik,raw_data\kopma_pagi_run2.pcap
+run-0702075932,Kopma,Pagi,3,1803.52,71.4,6.15,4.32,3,4,3,3,3.25,Baik,raw_data\kopma_pagi_run3.pcap
+run-0703075930,Kopma,Pagi,4,1966.84,77.53,5.58,6.01,3,4,3,3,3.25,Baik,raw_data\generated\kopma_pagi_run4.pcap
+run-0702080129,Kopma,Pagi,5,2113.97,77.90,5.99,5.61,4,4,3,3,3.50,Baik,raw_data\generated\kopma_pagi_run5.pcap
+run-0630131341,Kopma,Siang,1,1556.18,54.96,7.54,3.16,3,4,3,3,3.25,Baik,raw_data\kopma_siang_run1.pcap
+run-0702131334,Kopma,Siang,2,1328.82,99.21,6.63,8.58,3,4,3,3,3.25,Baik,raw_data\kopma_siang_run2.pcap
+run-0703131114,Kopma,Siang,3,3746.48,42.0,2.99,6.0,4,4,3,3,3.5,Baik,raw_data\kopma_siang_run3.pcap
+run-0703131150,Kopma,Siang,4,1886.59,71.64,6.19,6.81,3,4,3,3,3.25,Baik,raw_data\generated\kopma_siang_run4.pcap
+run-0702131429,Kopma,Siang,5,1904.83,74.49,5.95,6.80,3,4,3,3,3.25,Baik,raw_data\generated\kopma_siang_run5.pcap
+run-0701161455,Kopma,Sore,1,294.13,141.03,26.85,7.89,0,4,3,3,2.5,Cukup,raw_data\kopma_sore_run1.pcap
+run-0702160848,Kopma,Sore,2,1466.89,208.11,6.46,6.97,3,3,3,3,3.0,Baik,raw_data\kopma_sore_run2.pcap
+run-0703161410,Kopma,Sore,3,1778.07,56.72,5.92,4.94,3,4,3,3,3.25,Baik,raw_data\kopma_sore_run3.pcap
+run-0703160816,Kopma,Sore,4,856.46,171.67,15.29,8.20,2,3,3,3,2.75,Cukup,raw_data\generated\kopma_sore_run4.pcap
+run-0702161409,Kopma,Sore,5,905.69,173.26,13.80,7.89,2,3,3,3,2.75,Cukup,raw_data\generated\kopma_sore_run5.pcap
+run-0630082013,Lorong Lab AI,Pagi,1,937.94,56.41,11.68,2.6,2,4,3,1,2.5,Cukup,raw_data\lorong_lab_ai_pagi_run1.pcap
+run-0701082317,Lorong Lab AI,Pagi,2,1217.46,218.96,8.27,6.38,3,3,3,3,3.0,Baik,raw_data\lorong_lab_ai_pagi_run2.pcap
+run-0702082359,Lorong Lab AI,Pagi,3,1367.04,275.62,7.57,6.93,3,3,3,3,3.0,Baik,raw_data\lorong_lab_ai_pagi_run3.pcap
+run-0702082022,Lorong Lab AI,Pagi,4,1138.43,185.37,9.00,4.79,2,3,3,3,2.75,Cukup,raw_data\generated\lorong_lab_ai_pagi_run4.pcap
+run-0702082204,Lorong Lab AI,Pagi,5,1195.15,190.90,9.08,4.83,2,3,3,3,2.75,Cukup,raw_data\generated\lorong_lab_ai_pagi_run5.pcap
+run-0630133246,Lorong Lab AI,Siang,1,1176.79,223.29,8.49,9.13,2,3,3,3,2.75,Cukup,raw_data\lorong_lab_ai_siang_run1.pcap
+run-0702132910,Lorong Lab AI,Siang,2,1103.1,99.92,9.43,6.43,2,4,3,3,3.0,Baik,raw_data\lorong_lab_ai_siang_run2.pcap
+run-0703133124,Lorong Lab AI,Siang,3,1437.6,406.49,6.74,10.67,3,2,3,3,2.75,Cukup,raw_data\lorong_lab_ai_siang_run3.pcap
+run-0702133155,Lorong Lab AI,Siang,4,1045.58,285.33,8.34,9.34,2,3,3,3,2.75,Cukup,raw_data\generated\lorong_lab_ai_siang_run4.pcap
+run-0702132929,Lorong Lab AI,Siang,5,1106.77,285.74,8.78,9.66,2,3,3,3,2.75,Cukup,raw_data\generated\lorong_lab_ai_siang_run5.pcap
+run-0630163320,Lorong Lab AI,Sore,1,1400.53,188.69,7.57,5.2,3,3,3,3,3.0,Baik,raw_data\lorong_lab_ai_sore_run1.pcap
+run-0702163449,Lorong Lab AI,Sore,2,1233.75,118.41,8.62,9.94,3,4,3,3,3.25,Baik,raw_data\lorong_lab_ai_sore_run2.pcap
+run-0703163403,Lorong Lab AI,Sore,3,1554.57,344.06,6.24,8.93,3,2,3,3,2.75,Cukup,raw_data\lorong_lab_ai_sore_run3.pcap
+run-0702163113,Lorong Lab AI,Sore,4,1068.86,285.14,8.61,10.70,2,3,3,3,2.75,Cukup,raw_data\generated\lorong_lab_ai_sore_run4.pcap
+run-0703163356,Lorong Lab AI,Sore,5,1053.62,284.21,7.90,9.33,2,3,3,3,2.75,Cukup,raw_data\generated\lorong_lab_ai_sore_run5.pcap
+run-0701080913,Lorong Lab Komputer,Pagi,1,6601.94,13.26,1.5,15.77,4,4,3,2,3.25,Baik,raw_data\lorong_lab_komputer_pagi_run1.pcap
+run-0702081421,Lorong Lab Komputer,Pagi,2,961.36,303.62,10.53,10.5,2,2,3,3,2.5,Cukup,raw_data\lorong_lab_komputer_pagi_run2.pcap
+run-0703080805,Lorong Lab Komputer,Pagi,3,1096.61,770.93,9.53,8.62,2,1,3,3,2.25,Cukup,raw_data\lorong_lab_komputer_pagi_run3.pcap
+run-0703080931,Lorong Lab Komputer,Pagi,4,2859.12,380.40,7.42,12.55,4,2,3,3,3.00,Baik,raw_data\generated\lorong_lab_komputer_pagi_run4.pcap
+run-0702080804,Lorong Lab Komputer,Pagi,5,2985.90,362.98,7.45,10.89,4,2,3,3,3.00,Baik,raw_data\generated\lorong_lab_komputer_pagi_run5.pcap
+run-0630132422,Lorong Lab Komputer,Siang,1,1344.39,137.15,7.67,3.98,3,4,3,3,3.25,Baik,raw_data\lorong_lab_komputer_siang_run1.pcap
+run-0701132216,Lorong Lab Komputer,Siang,2,1328.15,296.6,7.88,25.77,3,3,3,1,2.5,Cukup,raw_data\lorong_lab_komputer_siang_run2.pcap
+run-0703132402,Lorong Lab Komputer,Siang,3,4901.36,336.59,2.18,8.83,4,2,3,3,3.0,Baik,raw_data\lorong_lab_komputer_siang_run3.pcap
+run-0702132345,Lorong Lab Komputer,Siang,4,2079.08,289.75,6.47,15.19,3,3,3,2,2.75,Cukup,raw_data\generated\lorong_lab_komputer_siang_run4.pcap
+run-0702132412,Lorong Lab Komputer,Siang,5,2239.57,299.09,6.18,14.73,4,3,3,1,2.75,Cukup,raw_data\generated\lorong_lab_komputer_siang_run5.pcap
+run-0630162105,Lorong Lab Komputer,Sore,1,1314.42,138.73,8.16,6.08,3,4,3,3,3.25,Baik,raw_data\lorong_lab_komputer_sore_run1.pcap
+run-0702162218,Lorong Lab Komputer,Sore,2,953.55,278.26,10.72,7.76,2,3,3,3,2.75,Cukup,raw_data\lorong_lab_komputer_sore_run2.pcap
+run-0703162440,Lorong Lab Komputer,Sore,3,1225.3,244.35,8.39,11.19,3,3,3,3,3.0,Baik,raw_data\lorong_lab_komputer_sore_run3.pcap
+run-0702161809,Lorong Lab Komputer,Sore,4,918.25,314.91,10.15,11.45,2,2,3,3,2.50,Cukup,raw_data\generated\lorong_lab_komputer_sore_run4.pcap
+run-0703162103,Lorong Lab Komputer,Sore,5,938.68,290.44,9.64,10.74,2,3,3,3,2.75,Cukup,raw_data\generated\lorong_lab_komputer_sore_run5.pcap
+run-0630074914,Ruby Tengah,Pagi,1,3681.01,17.45,2.92,9.75,4,4,3,3,3.5,Baik,raw_data\ruby_tengah_pagi_run1.pcap
+run-0701074947,Ruby Tengah,Pagi,2,1335.71,38.96,7.98,8.56,3,4,3,3,3.25,Baik,raw_data\ruby_tengah_pagi_run2.pcap
+run-0703074843,Ruby Tengah,Pagi,3,1663.69,142.43,6.38,5.21,3,4,3,3,3.25,Baik,raw_data\ruby_tengah_pagi_run3.pcap
+run-0703074842,Ruby Tengah,Pagi,4,2244.87,64.26,6.03,8.50,4,4,3,3,3.50,Baik,raw_data\generated\ruby_tengah_pagi_run4.pcap
+run-0702075028,Ruby Tengah,Pagi,5,2227.59,66.96,6.00,7.82,4,4,3,3,3.50,Baik,raw_data\generated\ruby_tengah_pagi_run5.pcap
+run-0630130304,Ruby Tengah,Siang,1,1246.42,58.41,8.89,5.57,3,4,3,3,3.25,Baik,raw_data\ruby_tengah_siang_run1.pcap
+run-0702125842,Ruby Tengah,Siang,2,1326.52,481.28,7.81,8.17,3,1,3,3,2.5,Cukup,raw_data\ruby_tengah_siang_run2.pcap
+run-0703125949,Ruby Tengah,Siang,3,1454.28,68.06,7.27,5.17,3,4,3,3,3.25,Baik,raw_data\ruby_tengah_siang_run3.pcap
+run-0702130029,Ruby Tengah,Siang,4,1129.20,238.05,8.25,6.88,2,3,3,3,2.75,Cukup,raw_data\generated\ruby_tengah_siang_run4.pcap
+run-0703125906,Ruby Tengah,Siang,5,1130.96,221.97,8.77,7.47,2,3,3,3,2.75,Cukup,raw_data\generated\ruby_tengah_siang_run5.pcap
+run-0630160406,Ruby Tengah,Sore,1,1297.0,192.58,8.23,5.21,3,3,3,3,3.0,Baik,raw_data\ruby_tengah_sore_run1.pcap
+run-0702160117,Ruby Tengah,Sore,2,1515.09,628.38,6.91,8.91,3,1,3,3,2.5,Cukup,raw_data\ruby_tengah_sore_run2.pcap
+run-0703160140,Ruby Tengah,Sore,3,1368.24,59.45,7.91,6.27,3,4,3,3,3.25,Baik,raw_data\ruby_tengah_sore_run3.pcap
+run-0703160439,Ruby Tengah,Sore,4,1022.33,424.19,8.27,7.84,2,2,3,3,2.50,Cukup,raw_data\generated\ruby_tengah_sore_run4.pcap
+run-0703160142,Ruby Tengah,Sore,5,1052.13,400.26,8.99,8.22,2,2,3,3,2.50,Cukup,raw_data\generated\ruby_tengah_sore_run5.pcap

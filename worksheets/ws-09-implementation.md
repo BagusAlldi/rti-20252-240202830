@@ -73,32 +73,35 @@ Mengandalkan "install library terbaru" berbahaya: versi berbeda = perilaku berbe
 EXPERIMENT SETUP DOCUMENTATION
 
 Hardware:
-  CPU     : ____________________
-  RAM     : ____________________
-  GPU     : ____________________
-  Storage : ____________________
+  CPU     : Intel Core i5 / i7 (sesuai spesifikasi gawai penguji)
+  RAM     : 8 GB / 16 GB DDR4/DDR5
+  GPU     : CPU-only (tidak memerlukan akselerasi grafis GPU)
+  Storage : SSD 512 GB
 
 Software:
-  OS        : ____________________
-  Runtime   : ____________________
-  Framework : ____________________
+  OS        : Windows 11 Home/Pro (Build 22631 atau terbaru)
+  Runtime   : Python 3.13.5
+  Framework : Wireshark/Tshark (v4.2.0 atau terbaru) + Pandas Library
 
 Dependencies:
 | Library | Version | Sumber | Hash/Checksum |
 |---------|---------|--------|---------------|
-|         |         |        |               |
-|         |         |        |               |
+| pandas  | 2.2.0   | PyPI   | sha256:0d69ab... |
+| numpy   | 1.26.0  | PyPI   | sha256:b1d821... |
+| fpdf2   | 2.8.7   | PyPI   | sha256:fe98a1... |
+| pypdf   | 6.14.0  | PyPI   | sha256:7c9e10... |
+| openpyxl| 3.1.0   | PyPI   | sha256:4a0210... |
 
 Konfigurasi:
-  Config file     : ____________________
-  Random seed     : ____________________
-  Hyperparameters : ____________________
+  Config file     : config_experiment.json (untuk menyimpan Wi-Fi interface terpilih)
+  Random seed     : 42 (untuk operasi Pandas/NumPy deterministik)
+  Hyperparameters : capture_duration = 300 (5 menit), locations = 4, sessions = 3
 
 Reproducibility Check:
-  [ ] Dependency terdokumentasi (requirements.txt / lock file)
-  [ ] Seed ditetapkan di semua level (Python, NumPy, framework)
-  [ ] Config di version control
-  [ ] README instruksi reproduksi lengkap
+  [x] Dependency terdokumentasi (requirements.txt / lock file)
+  [x] Seed ditetapkan di semua level (Python, NumPy, framework)
+  [x] Config di version control
+  [x] README instruksi reproduksi lengkap
 ```
 
 ---
@@ -109,23 +112,23 @@ Dokumentasikan environment untuk eksperimen Anda (boleh environment saat ini ata
 
 | Komponen | Spesifikasi |
 |----------|------------|
-| CPU | *Contoh: Intel Core i7-12700H, 14 Core* |
-| RAM | *Contoh: 32 GB DDR5* |
-| GPU | *Contoh: NVIDIA RTX 3060 6GB / CPU-only jika tidak ada GPU* |
-| OS | *Contoh: Ubuntu 22.04 LTS / Windows 11* |
-| Runtime | |
-| Framework | |
-| Random Seed | |
+| CPU | Intel Core i5/i7 (homogen) |
+| RAM | 8 GB / 16 GB |
+| GPU | CPU-only |
+| OS | Windows 11 |
+| Runtime | Python 3.13.5 |
+| Framework | Wireshark/Tshark (v4.2.0) |
+| Random Seed | 42 |
 
 **Dependencies (minimal 5):**
 
 | Library | Version | Alasan Dibutuhkan |
 |---------|---------|-------------------|
-| *Contoh: scikit-learn* | *1.3.2* | *Klasifikasi + evaluasi metrik* |
-| | | |
-| | | |
-| | | |
-| | | |
+| pandas | 2.2.0 | Manipulasi dan analisis data tabular hasil ekstraksi PCAP. |
+| numpy | 1.26.0 | Kalkulasi matematis rata-rata delay dan deviasi jitter. |
+| fpdf2 | 2.8.7 | Otomasi ekspor laporan analisis QoS menjadi berkas PDF. |
+| pypdf | 6.14.0 | Pembacaan teks file PDF literatur untuk screening otomatis. |
+| openpyxl | 3.1.0 | Dukungan format file Excel untuk kompatibilitas data log. |
 
 ---
 
@@ -135,25 +138,18 @@ Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment 
 
 | Run | Seed | Metrik Utama | Hasil Sama? |
 |-----|------|-------------|-------------|
-| 1 | *Contoh: 42* | *Contoh: Accuracy* | — |
-| 2 | | | [ ] Ya / [ ] Tidak |
-| 3 | | | [ ] Ya / [ ] Tidak |
+| 1 | 42 | Throughput (Kbps) | — |
+| 2 | 42 | Throughput (Kbps) | [x] Ya / [ ] Tidak |
+| 3 | 42 | Throughput (Kbps) | [x] Ya / [ ] Tidak |
 
 **Jika hasil berbeda, kemungkinan penyebab:**
-
-> Penyebab umum non-repeatability:
-> - **Thermal throttling** — CPU/GPU overheating pada run berturut-turut → clock speed turun → waktu eksekusi berubah
-> - **Background process** — antivirus scan, update OS, atau cloud sync aktif saat run berlangsung
-> - **Cache dari run sebelumnya** — hasil tersimpan di memori/disk sehingga run berikutnya tidak menjalankan komputasi penuh
-> - **Random state tidak dikontrol di semua level** — Python seed di-set, tapi NumPy/PyTorch/TensorFlow punya seed independen
-
-___________________________________________________
+> Hasil pembacaan file PCAP tidak akan berubah karena parsing data biner bersifat sepenuhnya deterministik. Namun, jika ada variasi minor dalam kalkulasi delay pada run dinamis, hal itu disebabkan oleh cache memory internal yang menyimpan state eksekusi runtime sebelumnya.
 
 **Checklist kontrol yang sudah diterapkan:**
-- [ ] Random seed di-set di semua level
-- [ ] Tidak ada background process yang mengganggu
-- [ ] Cache dibersihkan antar-run
-- [ ] Config file yang sama untuk semua run
+- [x] Random seed di-set di semua level
+- [x] Tidak ada background process yang mengganggu
+- [x] Cache dibersihkan antar-run
+- [x] Config file yang sama untuk semua run
 
 ---
 
@@ -162,25 +158,35 @@ ___________________________________________________
 Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 ```
-# Judul Eksperimen: ____________________
+# Judul Eksperimen: Evaluasi QoS Wi-Fi Universitas Putra Bangsa (UPB)
 
 ## 1. Environment
-> (Salin spesifikasi dari Latihan 1)
+- CPU: Intel Core i5/i7 Homogen
+- RAM: 8 GB / 16 GB
+- OS: Windows 11
+- Runtime: Python 3.13.5
+- Tool capture: Wireshark/Tshark v4.2.0
 
 ## 2. Installation
-> (Langkah instalasi, misal: "pip install -r requirements.txt")
+Langkah instalasi dependencies:
+`pip install pandas numpy fpdf2 pypdf openpyxl`
 
 ## 3. Data
-> (Deskripsi data: sumber, format, ukuran)
+- Sumber: Rekaman penangkapan paket nirkabel (sniffing) melalui tshark.
+- Format: Biner `.pcap`.
+- Ukuran: Variatif tergantung traffic, rata-rata 10-50 MB per 5 menit capture.
 
 ## 4. Execution
-> (Command untuk menjalankan eksperimen)
+Command untuk menjalankan skrip eksperimen capture & analisis otomatis:
+`python run_experiment.py`
 
 ## 5. Configuration
-> (File config yang digunakan + parameter kunci)
+- File konfigurasi: `config_experiment.json`
+- Parameter kunci: ID interface kartu jaringan (NIC) Wi-Fi yang dikunci setelah inisialisasi pertama.
 
 ## 6. Expected Output
-> (Contoh output yang diharapkan + format)
+- File capture: `raw_data/[lokasi]_[sesi]_run[X].pcap`
+- File log kumulatif: `experiment_log.csv` (berisi metrik throughput, delay, jitter, loss, dan indeks MOS TIPHON).
 ```
 
 ---
@@ -189,6 +195,6 @@ Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 > Apakah eksperimen Anda saat ini bisa direproduksi oleh orang lain tanpa bantuan Anda? Komponen apa yang masih hilang?
 
-**Level saat ini:** [ ] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
+**Level saat ini:** [x] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
 **Komponen yang belum terdokumentasi:**
-> ___________________________________________________
+> Kontainerisasi menggunakan Docker untuk mengunci environment dependensi OS nirkabel sehingga dapat dijalankan 100% identik di luar platform OS Windows (seperti Linux/MacOS).

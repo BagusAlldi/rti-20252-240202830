@@ -96,15 +96,22 @@ Susun execution plan untuk eksperimen Anda. Tentukan skenario, jumlah run, dan s
 
 | Run # | Skenario | Seed | Parameter Kunci | Status |
 |-------|----------|------|----------------|--------|
-| *1* | *Contoh: BERT-base, DS-1* | *42* | *lr=2e-5, epoch=10* | *Planned* |
-| *2* | *BERT-base, DS-1* | *123* | *lr=2e-5, epoch=10* | *Planned* |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+| 1-5 | Ruby Tengah - Pagi | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 6-10 | Ruby Tengah - Siang | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 11-15 | Ruby Tengah - Sore | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 16-20 | Kopma - Pagi | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 21-25 | Kopma - Siang | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 26-30 | Kopma - Sore | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 31-35 | Lorong Lab Komputer - Pagi | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 36-40 | Lorong Lab Komputer - Siang | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 41-45 | Lorong Lab Komputer - Sore | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 46-50 | Lorong Lab AI - Pagi | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 51-55 | Lorong Lab AI - Siang | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
+| 56-60 | Lorong Lab AI - Sore | N/A (Live Wi-Fi) | 5 Menit, Wi-Fi UPB | Planned |
 
-**Total skenario:** ____
-**Run per skenario:** ____
-**Total run keseluruhan:** ____
+**Total skenario:** 12 skenario (4 lokasi kampus x 3 sesi waktu)
+**Run per skenario:** 5 kali pengulangan
+**Total run keseluruhan:** 60 kali pengulangan run
 
 ---
 
@@ -113,27 +120,37 @@ Susun execution plan untuk eksperimen Anda. Tentukan skenario, jumlah run, dan s
 Desain format data log untuk eksperimen Anda. Tentukan field apa saja yang akan dicatat.
 
 **Identitas:**
-| Field | Contoh |
+| Field | Contoh / Deskripsi |
 |-------|--------|
-| Run ID | *run-001* |
-| Timestamp | *2025-03-15T10:30:00* |
-| | |
+| Run ID | run-0623083523 (ID unik acak berbasis timestamp) |
+| Timestamp | 2026-06-23T08:35:23 (ISO 8601) |
+| Lokasi | Ruby Tengah, Kopma, Lorong Lab Komputer, Lorong Lab AI |
+| Sesi | Pagi, Siang, Sore |
+| Run # | Pengulangan ke- (1 s.d. 5) |
 
 **Konfigurasi:**
-| Field | Contoh |
+| Field | Contoh / Deskripsi |
 |-------|--------|
-| Seed | *42* |
-| Code version | *commit abc1234* |
-| | |
+| Interface ID | \Device\NPF_{B5ACA46D-0E95-4F54-A66E-30E4FCAB4CA5} (GUID kartu Wi-Fi) |
+| Interface Name | Intel(R) Wi-Fi 6 AX201 160MHz (Nama adapter di Windows) |
+| Durasi Capture | 300 (durasi dalam detik / 5 menit) |
 
 **Hasil:**
 | Metrik | Tipe Data | Range Valid |
 |--------|----------|-------------|
-| *Contoh: Accuracy* | *float* | *0.0 – 1.0* |
-| | | |
-| | | |
+| Throughput | float | >= 0.0 Kbps |
+| Delay (Latency) | float | >= 0.0 ms |
+| Jitter | float | >= 0.0 ms |
+| Packet Loss | float | 0.0 – 100.0 % |
+| Idx Throughput | integer | 0 – 4 (TIPHON Index) |
+| Idx Delay | integer | 1 – 4 (TIPHON Index) |
+| Idx Jitter | integer | 1 – 4 (TIPHON Index) |
+| Idx Loss | integer | 1 – 4 (TIPHON Index) |
+| Avg Index | float | 1.0 – 4.0 |
+| Predikat | string | Sangat Baik, Baik, Cukup, Buruk |
+| File PCAP | string | Path file pcap (e.g., raw_data\ruby_tengah_pagi_run2.pcap) |
 
-**Format output:** [ ] CSV / [ ] JSON / [ ] Database / [ ] Lainnya: ____
+**Format output:** [x] CSV / [ ] JSON / [ ] Database / [ ] Lainnya: ____
 
 ---
 
@@ -143,10 +160,10 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 
 | Jenis Anomali | Contoh | Tindakan |
 |---------------|--------|----------|
-| Run gagal (crash) | *Contoh: OOM pada batch_size=64* | *Contoh: Dokumentasi, re-run batch_size=32, catat perubahan* |
-| Hasil ekstrem | | |
-| Waktu eksekusi anomali | | |
-| Inkonsistensi dengan run lain | | |
+| Run gagal (crash) | Koneksi tshark terputus atau driver Npcap crash | Buka PowerShell/Terminal dengan akses Administrator, jalankan ulang driver lewat perintah `net start npcap`, lalu jalankan kembali skrip. |
+| Hasil ekstrem | Packet Loss terdeteksi 100% atau delay > 5000ms | Verifikasi apakah laptop terputus (*disconnect*) dari Wi-Fi kampus saat perekaman berjalan. Catat kejadian ini di log, lalu lakukan perekaman ulang (*re-run*). |
+| File PCAP kosong | Ukuran file PCAP kurang dari 1 KB (0 packets) | Cek apakah nomor indeks adapter Wi-Fi Anda bergeser di Windows. Jalankan skrip, pilih ulang nomor kartu Wi-Fi Anda agar ID GUID terbarui, pastikan browser Anda sedang aktif memutar YouTube, lalu ulangi perekaman. |
+| Log tidak tersimpan | Skrip terhenti secara paksa sebelum menulis ke CSV | Catat nomor run bersangkutan sebagai "Failed" dan lakukan re-run baru untuk menggantikannya agar jumlah data tetap genap 60. |
 
 **Prinsip:** Detect → Investigate → Document → Decide
 
@@ -157,6 +174,7 @@ Rencanakan bagaimana menangani anomali. Untuk setiap jenis, tentukan langkah yan
 > Pernahkah Anda melaporkan hasil riset/tugas dari single run? Apa risikonya? Bagaimana multiple run mengubah kepercayaan terhadap hasil?
 
 **Pengalaman sebelumnya:**
-> ___________________________________________________
+> Ya, sebelumnya sering menggunakan satu run karena dinilai praktis dan cepat. Namun, hal ini sangat berisiko karena kualitas jaringan nirkabel (Wi-Fi) kampus sangat fluktuatif dan dipengaruhi oleh jumlah mahasiswa aktif di sekitar area Access Point yang berubah tiap menit.
+
 **Yang akan dilakukan berbeda:**
-> ___________________________________________________
+> Di penelitian ini, saya menerapkan 5 kali pengulangan (runs) untuk setiap skenario. Dengan multiple runs, saya dapat menghitung nilai rata-rata metrik QoS yang stabil secara statistik sehingga hasil konversi ke predikat TIPHON menjadi andal dan tepercaya secara akademis.
